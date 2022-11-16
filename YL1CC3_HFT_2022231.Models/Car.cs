@@ -19,5 +19,7 @@ namespace YL1CC3_HFT_2022231.Models
         public virtual Brand Brand { get; set; }
         //foreign
         public int BrandId { get; set; }
+        [NotMapped]
+        public virtual ICollection<Rent> Rents { get; set; }
     }
 }

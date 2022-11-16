@@ -22,8 +22,9 @@ namespace YL1CC3_HFT_2022231.Models
                 return End - Start;
             }
         }
-        [NotMapped]
         // foreign
+        public int CarId { get; set; }
+        [NotMapped]
         public virtual Car Car { get; set; }
 
     }
