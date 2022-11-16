@@ -22,6 +22,30 @@ namespace YL1CC3_HFT_2022231.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Car>(t => t
+            .HasMany(t => t.Rents)
+            .WithOne(t => t.Car)
+            .HasForeignKey(t => t.CarId)
+            .OnDelete(DeleteBehavior.Cascade));
+
+            modelBuilder.Entity<Brand>(t => t
+            .HasMany(t => t.Cars)
+            .WithOne(t => t.Brand)
+            .HasForeignKey(t => t.BrandId)
+            .OnDelete(DeleteBehavior.Cascade));
+
+            //modelBuilder.Entity<Genre>(genre => genre
+            //.HasMany(t => t.Movies)
+            //.WithOne(t => t.Genre)
+            //.HasForeignKey(t => t.GenreId)
+            //.OnDelete(DeleteBehavior.Cascade));
+
+            //modelBuilder.Entity<Movie>(movie => movie
+            //.HasMany(t => t.Rents)
+            //.WithOne(t => t.Movie)
+            //.HasForeignKey(t => t.MovieId)
+            //.OnDelete(DeleteBehavior.Cascade));
+
             modelBuilder.Entity<Brand>().HasData(new Brand[]
             {
                 new Brand() { Id = 1, Name = "BMW" },
