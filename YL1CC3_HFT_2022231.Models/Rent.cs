@@ -8,12 +8,22 @@ using System.Threading.Tasks;
 
 namespace YL1CC3_HFT_2022231.Models
 {
-    class Rent
+    public class Rent
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public TimeSpan Interval
+        {
+            get
+            {
+                return End - Start;
+            }
+        }
         [NotMapped]
+        // foreign
         public virtual Car Car { get; set; }
 
     }

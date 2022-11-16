@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace YL1CC3_HFT_2022231.Models
 {
-    class Car
+    public class Car
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,6 +17,7 @@ namespace YL1CC3_HFT_2022231.Models
         public int Price { get; set; }
         [NotMapped]
         public virtual Brand Brand { get; set; }
+        //foreign
         public int BrandId { get; set; }
     }
 }
