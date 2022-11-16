@@ -8,4 +8,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YL1CC3_HFT_2022231.Logic\YL1CC3_HFT_2022231.Logic.csproj" />
+    <ProjectReference Include="..\YL1CC3_HFT_2022231.Models\YL1CC3_HFT_2022231.Models.csproj" />
+    <ProjectReference Include="..\YL1CC3_HFT_2022231.Repository\YL1CC3_HFT_2022231.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
