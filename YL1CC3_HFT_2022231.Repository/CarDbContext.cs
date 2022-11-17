@@ -16,23 +16,25 @@ namespace YL1CC3_HFT_2022231.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("autok");
+            optionsBuilder.UseInMemoryDatabase("autok")
+                .UseLazyLoadingProxies();
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Car>(t => t
-            .HasMany(t => t.Rents)
-            .WithOne(t => t.Car)
-            .HasForeignKey(t => t.CarId)
+            .HasOne(t=>t.Brand)
+            .WithMany(t=>t.Cars)
+            .HasForeignKey(t=>t.BrandId)
             .OnDelete(DeleteBehavior.Cascade));
 
-            modelBuilder.Entity<Brand>(t => t
-            .HasMany(t => t.Cars)
-            .WithOne(t => t.Brand)
-            .HasForeignKey(t => t.BrandId)
-            .OnDelete(DeleteBehavior.Cascade));
+            modelBuilder.Entity<Rent>(t => t
+            .HasOne(t=>t.Car)
+            .WithMany(t=>t.Rents)
+            .HasForeignKey(t=>t.CarId)
+            .OnDelete(DeleteBehavior.Cascade)
+            );
 
             //modelBuilder.Entity<Genre>(genre => genre
             //.HasMany(t => t.Movies)

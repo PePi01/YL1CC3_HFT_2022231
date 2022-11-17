@@ -7,7 +7,7 @@ using YL1CC3_HFT_2022231.Models;
 
 namespace YL1CC3_HFT_2022231.Repository
 {
-    class BrandRepository : Repository<Brand>, IRepository<Brand>
+    public class BrandRepository : Repository<Brand>, IRepository<Brand>
     {
         public BrandRepository(CarDbContext ctx) : base(ctx)
         {

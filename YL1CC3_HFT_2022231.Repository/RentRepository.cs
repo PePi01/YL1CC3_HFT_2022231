@@ -7,7 +7,7 @@ using YL1CC3_HFT_2022231.Models;
 
 namespace YL1CC3_HFT_2022231.Repository
 {
-    class RentRepository : Repository<Rent>, IRepository<Rent>
+    public class RentRepository : Repository<Rent>, IRepository<Rent>
     {
         public RentRepository(CarDbContext ctx) : base(ctx)
         {
