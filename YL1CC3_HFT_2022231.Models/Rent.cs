@@ -27,5 +27,9 @@ namespace YL1CC3_HFT_2022231.Models
         [NotMapped]
         public virtual Car Car { get; set; }
 
+        public Rent()
+        {
+
+        }
     }
 }

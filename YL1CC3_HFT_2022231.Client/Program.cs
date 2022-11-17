@@ -11,7 +11,7 @@ namespace YL1CC3_HFT_2022231.Client
         {
             CarDbContext db = new CarDbContext();
             var asd = from x in db.Rents
-                      group x by x.Interval into g
+                      group x by x.CarId into g
                       select new
                       {
                           asd = g.Key,
