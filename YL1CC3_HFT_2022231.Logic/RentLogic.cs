@@ -12,23 +12,18 @@ namespace YL1CC3_HFT_2022231.Logic
     {
         IRepository<Rent> repo;
         // NON CRUD: egyes kocsikat milyen gyakorisaggal bereltek ki
-        //public IEnumerable<RentFrequency> FreqOfCarsRented()
-        //{
-        //    return    from x in repo.ReadAll()
-        //              group x by x.CarId into g
-        //              select new RentFrequency
-        //              {
-        //                  Frequency = g.Count(),
-        //                  Model = g.Select(t => t.Car.Model),
-        //              };
+        public IEnumerable<Renting> RentTimes()
+        {
 
-        //    return from x in repo.ReadAll()
-        //           select new RentFrequency
-        //           {
-        //               Frequency = x..Count(),
-        //               Model = g.Select(t => t.Car.Model),
-        //           };
-        //}
+            return from x in repo.ReadAll()
+                   select new Renting
+                   {
+                       Days = x.Interval,
+                       Model=x.Car.Model,
+                   };
+            
+        }
+
         public RentLogic(IRepository<Rent> repo)
         {
             this.repo = repo;
@@ -60,9 +55,11 @@ namespace YL1CC3_HFT_2022231.Logic
         }
     }
 
-    //public class RentFrequency
-    //{
-    //    public int Frequency { get; set; }
-    //    public IEnumerable<string> Model { get; set; }
-    //}
+    public class Renting
+    {
+        public int Days { get; set; }
+
+        public string Model { get; set; }
+        
+    }
 }

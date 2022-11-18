@@ -74,6 +74,11 @@ namespace YL1CC3_HFT_2022231.Client
             // NON CRUDOK 
             var segg = carLogic.FreqOfCarsRented();
             var fos = brandLogic.SumPriceByBrand();
+            var matuka = rentLogic.RentTimes();
+            var haziko = brandLogic.FreqOfBrandsRented();
+            var helmet = brandLogic.AvgPriceByBrand();
+
+            
 
             ;
         }

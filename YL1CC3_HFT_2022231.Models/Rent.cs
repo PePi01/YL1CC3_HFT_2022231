@@ -15,14 +15,14 @@ namespace YL1CC3_HFT_2022231.Models
         public int Id { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public TimeSpan Interval
+        public int Interval
         {
             get
             {
-                return End - Start;
+                return (End - Start).Days;
             }
         }
-        // foreign
+
         public int CarId { get; set; }
         [NotMapped]
         public virtual Car Car { get; set; }
