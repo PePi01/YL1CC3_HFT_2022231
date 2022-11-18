@@ -64,6 +64,16 @@ namespace YL1CC3_HFT_2022231.Client
                             Brand = g.Key.Name,
                             Sum = g.Sum(t => t.Price)
                         };
+            var seg=from x in rents.ReadAll().AsEnumerable()
+            group x by x.CarId into g
+            select new 
+            {
+                Frequency = g.Count(),
+                Model = g.Select(t => t.Car.Model),
+            };
+            // NON CRUDOK 
+            var segg = carLogic.FreqOfCarsRented();
+            var fos = brandLogic.SumPriceByBrand();
 
             ;
         }

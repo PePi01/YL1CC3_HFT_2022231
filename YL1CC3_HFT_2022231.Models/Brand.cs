@@ -15,7 +15,7 @@ namespace YL1CC3_HFT_2022231.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [NotMapped]
+        //[NotMapped]
         public virtual ICollection<Car> Cars { get; set; }
 
         public Brand()
