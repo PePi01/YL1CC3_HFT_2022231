@@ -68,7 +68,8 @@ namespace YL1CC3_HFT_2022231.Repository
                 new Car() { Id = 7, BrandId = 4, Price = 25000, Model = "VW Golf 4" },
                 new Car() { Id = 8, BrandId = 4, Price = 33000, Model = "VW Golf 5" },
                 new Car() { Id = 9, BrandId = 5, Price = 26000, Model = "Renault Arkana" },
-                new Car() { Id = 10, BrandId = 5, Price = 27000, Model = "Renault Clio" }
+                new Car() { Id = 10, BrandId = 5, Price = 27000, Model = "Renault Clio" },
+                new Car() { Id = 11, BrandId = 5, Price = 27000, Model = "Renault Clio" }
             });
 
             modelBuilder.Entity<Rent>().HasData(new Rent[]

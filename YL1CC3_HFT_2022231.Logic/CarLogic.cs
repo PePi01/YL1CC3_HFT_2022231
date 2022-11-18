@@ -8,7 +8,7 @@ using YL1CC3_HFT_2022231.Repository;
 
 namespace YL1CC3_HFT_2022231.Logic
 {
-    class CarLogic : ICarLogic
+    public class CarLogic : ICarLogic
     {
         IRepository<Car> repo;
 

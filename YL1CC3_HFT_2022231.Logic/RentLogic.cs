@@ -8,10 +8,29 @@ using YL1CC3_HFT_2022231.Repository;
 
 namespace YL1CC3_HFT_2022231.Logic
 {
-    class RentLogic : IRentLogic
+    public class RentLogic : IRentLogic
     {
         IRepository<Rent> repo;
+        public static IEnumerable<RentFrequency> FreqOfRents()
+        {
+            CarDbContext db = new CarDbContext();
+            var cars = new CarRepository(db);
+            var rents = new RentRepository(db);
+            var brands = new BrandRepository(db);
 
+            var carLogic = new CarLogic(cars);
+            var rentLogic = new RentLogic(rents);
+            var brandLogic = new BrandLogic(brands);
+
+            return    from x in db.Rents.AsEnumerable()
+                      group x by x.CarId into g
+                      select new RentFrequency
+                      {
+                          Frequency = g.Count(),
+                          Model = g.Select(t => t.Car.Model),
+                      };
+
+        }
         public RentLogic(IRepository<Rent> repo)
         {
             this.repo = repo;
@@ -41,5 +60,11 @@ namespace YL1CC3_HFT_2022231.Logic
         {
             this.repo.Update(item);
         }
+    }
+
+    public class RentFrequency
+    {
+        public int Frequency { get; set; }
+        public IEnumerable<string> Model { get; set; }
     }
 }

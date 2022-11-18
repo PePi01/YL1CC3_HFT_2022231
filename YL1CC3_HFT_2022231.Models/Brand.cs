@@ -22,6 +22,10 @@ namespace YL1CC3_HFT_2022231.Models
         {
             Cars = new HashSet<Car>();
         }
+        //public override string ToString()
+        //{
+        //    return Name;
+        //}
 
     }
 }
