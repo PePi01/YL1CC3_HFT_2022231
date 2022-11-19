@@ -10,7 +10,7 @@ using YL1CC3_HFT_2022231.Models;
 
 namespace YL1CC3_HFT_2022231.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BrandController : ControllerBase
     {

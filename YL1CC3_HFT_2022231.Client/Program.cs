@@ -58,7 +58,7 @@ namespace YL1CC3_HFT_2022231.Client
 
             static void Main(string[] args)
             {
-                rest = new RestService("http://localhost:10237/");
+                rest = new RestService("http://localhost:10237/","brand");
 
                 var brandSubMenu = new ConsoleMenu(args, level: 1)
                     .Add("List", () => List("Brand"))
@@ -67,33 +67,27 @@ namespace YL1CC3_HFT_2022231.Client
                     .Add("Update", () => Update("Brand"))
                     .Add("Exit", ConsoleMenu.Close);
 
-                var roleSubMenu = new ConsoleMenu(args, level: 1)
-                    .Add("List", () => List("Role"))
-                    .Add("Create", () => Create("Role"))
-                    .Add("Delete", () => Delete("Role"))
-                    .Add("Update", () => Update("Role"))
+                var rentSubMenu = new ConsoleMenu(args, level: 1)
+                    .Add("List", () => List("Rent"))
+                    .Add("Create", () => Create("Rent"))
+                    .Add("Delete", () => Delete("Rent"))
+                    .Add("Update", () => Update("Rent"))
                     .Add("Exit", ConsoleMenu.Close);
 
-                var directorSubMenu = new ConsoleMenu(args, level: 1)
-                    .Add("List", () => List("Director"))
-                    .Add("Create", () => Create("Director"))
-                    .Add("Delete", () => Delete("Director"))
-                    .Add("Update", () => Update("Director"))
+                var carSubMenu = new ConsoleMenu(args, level: 1)
+                    .Add("List", () => List("Car"))
+                    .Add("Create", () => Create("Car"))
+                    .Add("Delete", () => Delete("Car"))
+                    .Add("Update", () => Update("Car"))
                     .Add("Exit", ConsoleMenu.Close);
 
-                var movieSubMenu = new ConsoleMenu(args, level: 1)
-                    .Add("List", () => List("Movie"))
-                    .Add("Create", () => Create("Movie"))
-                    .Add("Delete", () => Delete("Movie"))
-                    .Add("Update", () => Update("Movie"))
-                    .Add("Exit", ConsoleMenu.Close);
+
 
 
                 var menu = new ConsoleMenu(args, level: 0)
-                    .Add("Movies", () => movieSubMenu.Show())
+                    .Add("Car", () => carSubMenu.Show())
                     .Add("Brands", () => brandSubMenu.Show())
-                    .Add("Roles", () => roleSubMenu.Show())
-                    .Add("Directors", () => directorSubMenu.Show())
+                    .Add("Rent", () => rentSubMenu.Show())
                     .Add("Exit", ConsoleMenu.Close);
 
                 menu.Show();
