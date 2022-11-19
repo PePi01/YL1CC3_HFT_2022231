@@ -9,7 +9,7 @@ using YL1CC3_HFT_2022231.Logic;
 
 namespace YL1CC3_HFT_2022231.Endpoint.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class NCRentController : ControllerBase
     {
