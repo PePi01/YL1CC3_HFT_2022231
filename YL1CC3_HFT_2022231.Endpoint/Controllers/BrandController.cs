@@ -12,41 +12,37 @@ namespace YL1CC3_HFT_2022231.Endpoint.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarController : ControllerBase
+    public class BrandController : ControllerBase
     {
-        ICarLogic logic;
-        public CarController(ICarLogic logic)
+        IBrandLogic logic;
+        public BrandController(IBrandLogic logic)
         {
             this.logic = logic;
         }
 
         [HttpGet]
-        public IEnumerable<Car> ReadAll()
+        public IEnumerable<Brand> ReadAll()
         {
             return this.logic.ReadAll();
         }
 
         [HttpGet("{id}")]
-        public Car Read(int id)
+        public Brand Read(int id)
         {
             return this.logic.Read(id);
         }
 
         [HttpPost]
-        public void Create([FromBody] Car value)
+        public void Create([FromBody] Brand value)
         {
             this.logic.Create(value);
         }
 
-        //---------ez lehet h update nek kell
         [HttpPut]
-        public void Put([FromBody] Car value)
+        public void Put([FromBody] Brand value)
         {
             this.logic.Update(value);
         }
-        //---------
-
-        
 
         [HttpDelete("{id}")]
         public void Delete(int id)

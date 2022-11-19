@@ -7,7 +7,7 @@ using YL1CC3_HFT_2022231.Models;
 
 namespace YL1CC3_HFT_2022231.Logic
 {
-    interface IRentLogic
+    public interface IRentLogic
     {
         void Create(Rent item);
         void Delete(int id);

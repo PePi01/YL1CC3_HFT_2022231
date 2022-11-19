@@ -7,7 +7,7 @@ using YL1CC3_HFT_2022231.Models;
 
 namespace YL1CC3_HFT_2022231.Logic
 {
-    interface IBrandLogic
+    public interface IBrandLogic
     {
         void Create(Brand item);
         void Delete(int id);
