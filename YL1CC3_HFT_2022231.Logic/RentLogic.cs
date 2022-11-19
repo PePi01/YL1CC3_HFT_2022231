@@ -11,7 +11,7 @@ namespace YL1CC3_HFT_2022231.Logic
     public class RentLogic : IRentLogic
     {
         IRepository<Rent> repo;
-        // NON CRUD: egyes kocsikat milyen gyakorisaggal bereltek ki
+        // NON CRUD: egyes kocsikat hany napra berelnek ki
         public IEnumerable<Renting> RentTimes()
         {
 

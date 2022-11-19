@@ -49,5 +49,6 @@ namespace YL1CC3_HFT_2022231.Endpoint.Controllers
         {
             this.logic.Delete(id);
         }
+
     }
 }

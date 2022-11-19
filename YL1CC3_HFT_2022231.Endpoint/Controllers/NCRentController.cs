@@ -20,6 +20,7 @@ namespace YL1CC3_HFT_2022231.Endpoint.Controllers
             this.logic = logic;
         }
         [HttpGet]
+        //rent duration
         public IEnumerable<Renting> RentTimes()
         {
             return this.logic.RentTimes();

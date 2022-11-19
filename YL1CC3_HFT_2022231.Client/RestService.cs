@@ -90,6 +90,7 @@ namespace YL1CC3_HFT_2022231.Client
 
         public T Get<T>(int id, string endpoint)
         {
+            
             T item = default(T);
             HttpResponseMessage response = client.GetAsync(endpoint + "/" + id.ToString()).GetAwaiter().GetResult();
             if (response.IsSuccessStatusCode)

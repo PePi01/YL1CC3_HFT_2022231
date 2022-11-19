@@ -179,7 +179,52 @@ namespace YL1CC3_HFT_2022231.Client
         }
         static void SPBB()
         {
-            rest.
+            var hello=rest.Get<PriceOfBrands>("NCBrand/SumPriceByBrand");
+            foreach (var item in hello)
+            {
+                Console.WriteLine(item.Brand+": "+ item.Price);
+                
+            }
+            Console.ReadLine();
+        }
+        //FreqOfBrandsRented
+        static void FOBR()
+        {
+            var hello = rest.Get<RentBrandFrequency>("NCBrand/FreqOfBrandsRented");
+            foreach (var item in hello)
+            {
+                Console.WriteLine(item.Brand+ ": "+ item.Frequency);
+            }
+            Console.ReadLine();
+        }
+        //AvgPriceByBrand
+        static void APBB()
+        {
+            var hello = rest.Get<AvgPriceOfBrands>("NCBrand/AvgPriceByBrand");
+            foreach (var item in hello)
+            {
+                Console.WriteLine(item.Brand + ": " + item.Price);
+            }
+            Console.ReadLine();
+        }
+        static void FOCR()
+        {
+            var hello = rest.Get<RentFrequency>("NCCar/FreqOfCarsRented");
+            foreach (var item in hello)
+            {
+                Console.WriteLine(item.Model + ": " + item.Frequency);
+            }
+            Console.ReadLine();
+        }
+        // rent duration in days
+        static void RT()
+        {
+            var hello = rest.Get<Renting>("NCRent/RentTimes");
+            foreach (var item in hello)
+            {
+                Console.WriteLine(item.Model + ": " + item.Days);
+            }
+            Console.ReadLine();
         }
 
 
@@ -210,9 +255,9 @@ namespace YL1CC3_HFT_2022231.Client
 
             var nonCruds = new ConsoleMenu(args, level: 1)
                 .Add("SumPriceByBrand", () => SPBB())
-                .Add("FreqOfBrandsRented", () => SPBB())
-                .Add("AvgPriceByBrand", () => SPBB())
-                .Add("FreqOfCarsRented", () => SPBB())
+                .Add("FreqOfBrandsRented", () => FOBR())
+                .Add("AvgPriceByBrand", () => APBB())
+                .Add("FreqOfCarsRented", () => FOCR())
                 .Add("RentTimes", () => SPBB())
                 .Add("Exit", ConsoleMenu.Close);
 

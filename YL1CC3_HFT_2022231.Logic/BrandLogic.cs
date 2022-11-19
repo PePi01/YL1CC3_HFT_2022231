@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using YL1CC3_HFT_2022231.Models;
 using YL1CC3_HFT_2022231.Repository;
+using static YL1CC3_HFT_2022231.Models.Brand;
 
 namespace YL1CC3_HFT_2022231.Logic
 {
@@ -73,21 +74,7 @@ namespace YL1CC3_HFT_2022231.Logic
         }
     }
 
-    public class AvgPriceOfBrands
-    {
-        public string Brand { get; set; }
-        public double Price { get; set; }
-    }
+    
 
-    public class RentBrandFrequency
-    {
-        public string Brand { get; set; }
-        public int Frequency { get; set; }
-    }
-
-    public class PriceOfBrands
-    {
-        public string Brand { get; set; }
-        public int Price { get; set; }
-    }
+    
 }
