@@ -22,4 +22,16 @@ namespace YL1CC3_HFT_2022231.Models
         public string Brand { get; set; }
         public int Frequency { get; set; }
     }
+    public class Renting
+    {
+        public int Days { get; set; }
+
+        public string Model { get; set; }
+
+    }
+    public class RentFrequency
+    {
+        public int Frequency { get; set; }
+        public string Model { get; set; }
+    }
 }

@@ -55,11 +55,5 @@ namespace YL1CC3_HFT_2022231.Logic
         }
     }
 
-    public class Renting
-    {
-        public int Days { get; set; }
-
-        public string Model { get; set; }
-        
-    }
+    
 }

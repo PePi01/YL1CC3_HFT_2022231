@@ -1,10 +1,7 @@
 ﻿using ConsoleTools;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using YL1CC3_HFT_2022231.Logic;
 using YL1CC3_HFT_2022231.Models;
-using YL1CC3_HFT_2022231.Repository;
 
 namespace YL1CC3_HFT_2022231.Client
 {
