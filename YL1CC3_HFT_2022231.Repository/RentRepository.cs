@@ -23,8 +23,9 @@ namespace YL1CC3_HFT_2022231.Repository
             var old = Read(item.Id);
             foreach (var prop in old.GetType().GetProperties())
             {
-                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null && prop.Name!="Interval")
                 {
+
                     prop.SetValue(old, prop.GetValue(item));
                 }
             }

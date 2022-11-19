@@ -36,17 +36,7 @@ namespace YL1CC3_HFT_2022231.Repository
             .OnDelete(DeleteBehavior.Cascade)
             );
 
-            //modelBuilder.Entity<Genre>(genre => genre
-            //.HasMany(t => t.Movies)
-            //.WithOne(t => t.Genre)
-            //.HasForeignKey(t => t.GenreId)
-            //.OnDelete(DeleteBehavior.Cascade));
 
-            //modelBuilder.Entity<Movie>(movie => movie
-            //.HasMany(t => t.Rents)
-            //.WithOne(t => t.Movie)
-            //.HasForeignKey(t => t.MovieId)
-            //.OnDelete(DeleteBehavior.Cascade));
 
             modelBuilder.Entity<Brand>().HasData(new Brand[]
             {
@@ -82,7 +72,7 @@ namespace YL1CC3_HFT_2022231.Repository
                 new() { Id = 6, CarId = 8, Start = new DateTime(2019, 7, 20), End = new DateTime(2020, 1, 16) },
                 new() { Id = 7, CarId = 10, Start = new DateTime(2020, 9, 15), End = new DateTime(2020, 9, 20) },
                 new() { Id = 8, CarId = 9, Start = new DateTime(2021, 5, 17), End = new DateTime(2021, 8, 16) },
-                new() { Id = 9, CarId = 7, Start = new DateTime(2022, 5, 29), End = new DateTime(2020, 10, 16) },
+                new() { Id = 9, CarId = 7, Start = new DateTime(2022, 5, 29), End = new DateTime(2022, 10, 16) },
                 new() { Id = 10, CarId = 1, Start = new DateTime(2018, 6, 8), End = new DateTime(2018, 12, 15) },
                 new() { Id = 11, CarId = 3, Start = new DateTime(2022, 1, 15), End = new DateTime(2022, 7, 8) },
                 new() { Id = 12, CarId = 9, Start = new DateTime(2019, 3, 4), End = new DateTime(2019, 7, 6) },
