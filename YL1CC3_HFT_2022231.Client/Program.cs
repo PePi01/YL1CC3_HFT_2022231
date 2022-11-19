@@ -43,8 +43,8 @@ namespace YL1CC3_HFT_2022231.Client
                 int daye = int.Parse(Console.ReadLine());
                 input.End = new DateTime(yeare, monthe, daye);
                 //rest.Post(new Rent() { Start = new DateTime(yeare,monthe,daye) }, "rent");
-
-                Console.Write("Enter car id");
+                List("Car");
+                Console.Write("Enter car id:");
                 input.CarId = int.Parse(Console.ReadLine());
                 rest.Post(input, "rent");
             }
@@ -93,6 +93,7 @@ namespace YL1CC3_HFT_2022231.Client
         }
         static void Update(string entity)
         {
+            // rent update ertelmetlen
             if (entity == "Brand")
             {
                 Console.Write("Enter Brand's id to update: ");
@@ -106,8 +107,8 @@ namespace YL1CC3_HFT_2022231.Client
             }
             else if (entity=="Car")
             {
-                Console.WriteLine("Enter Car's id to update: ");
                 List("Car");
+                Console.WriteLine("Enter Car's id to update: ");
                 int id = int.Parse(Console.ReadLine());
                 Car one = rest.Get<Car>(id, "car");
                 Console.WriteLine($"New model [old: {one.Model}] i.g.: bmw 116d:  ");
@@ -116,7 +117,7 @@ namespace YL1CC3_HFT_2022231.Client
                 Console.WriteLine($"Brand id: ");
                 int iden = int.Parse(Console.ReadLine());
                 one.BrandId = iden;
-                one.Brand.Name = rest.Get<Brand>(one.BrandId, "brand").Name;
+                //one.Brand.Name = rest.Get<Brand>(one.BrandId, "brand").Name;
                 rest.Put(one, "car");
 
             }
@@ -155,19 +156,31 @@ namespace YL1CC3_HFT_2022231.Client
         {
             if (entity == "Brand")
             {
+                List("Brand");
                 Console.Write("Enter Brand's id to delete: ");
                 int id = int.Parse(Console.ReadLine());
                 rest.Delete(id, "brand");
             }
             else if (entity == "Rent")
             {
+                List("Rent");
                 Console.Write("Enter Rent's id to delete: ");
                 int id = int.Parse(Console.ReadLine());
                 rest.Delete(id, "rent");
                 
             }
+            else if (entity=="Car")
+            {
+                List("Car");
+                Console.Write("Enter Car's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "rent");
+            }
         }
-
+        static void SPBB()
+        {
+            rest.
+        }
 
 
         static void Main(string[] args)
@@ -178,7 +191,7 @@ namespace YL1CC3_HFT_2022231.Client
                 .Add("List", () => List("Brand"))
                 .Add("Create", () => Create("Brand"))
                 .Add("Delete", () => Delete("Brand"))
-                .Add("Update", () => Update("Brand"))
+                //.Add("Update", () => Update("Brand"))
                 .Add("Exit", ConsoleMenu.Close);
 
             var rentSubMenu = new ConsoleMenu(args, level: 1)
@@ -195,6 +208,14 @@ namespace YL1CC3_HFT_2022231.Client
                 .Add("Update", () => Update("Car"))
                 .Add("Exit", ConsoleMenu.Close);
 
+            var nonCruds = new ConsoleMenu(args, level: 1)
+                .Add("SumPriceByBrand", () => SPBB())
+                .Add("FreqOfBrandsRented", () => SPBB())
+                .Add("AvgPriceByBrand", () => SPBB())
+                .Add("FreqOfCarsRented", () => SPBB())
+                .Add("RentTimes", () => SPBB())
+                .Add("Exit", ConsoleMenu.Close);
+
 
 
 
@@ -202,6 +223,7 @@ namespace YL1CC3_HFT_2022231.Client
                 .Add("Car", () => carSubMenu.Show())
                 .Add("Brands", () => brandSubMenu.Show())
                 .Add("Rent", () => rentSubMenu.Show())
+                .Add("Non-Cruds",()=>nonCruds.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();
