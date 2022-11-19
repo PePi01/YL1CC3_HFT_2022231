@@ -12,6 +12,8 @@ namespace YL1CC3_HFT_2022231.Client
     {
 
             static RestService rest;
+
+        #region Brand
             static void Create(string entity)
             {
                 if (entity == "Brand")
@@ -55,8 +57,9 @@ namespace YL1CC3_HFT_2022231.Client
                     rest.Delete(id, "brand");
                 }
             }
+        #endregion
 
-            static void Main(string[] args)
+        static void Main(string[] args)
             {
                 rest = new RestService("http://localhost:10237/","brand");
 
