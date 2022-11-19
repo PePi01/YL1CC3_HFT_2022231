@@ -12,11 +12,12 @@ namespace YL1CC3_HFT_2022231.Logic
         public IEnumerable<PriceOfBrands> SumPriceByBrand()
         {
             return (from x in repo.ReadAll()
-                        select new PriceOfBrands()
-                        {
-                            Brand = x.Name,
-                            Price=x.Cars.Select(t=>t.Price).Sum()
-                        }).OrderBy(x=>x.Price);
+                    where x.Cars.Sum(t => t.Price) > 0
+                    select new PriceOfBrands()
+                    {
+                        Brand = x.Name,
+                        Price=x.Cars.Select(t=>t.Price).Sum()
+                    }).OrderBy(x=>x.Price);
         }
 
         public IEnumerable<RentBrandFrequency> FreqOfBrandsRented()
@@ -31,11 +32,14 @@ namespace YL1CC3_HFT_2022231.Logic
         // markak atlagosan mennyibe kerulnek
         public IEnumerable<AvgPriceOfBrands> AvgPriceByBrand()
         {
+
             return (from x in repo.ReadAll().AsEnumerable()
+                    where x.Cars.Sum(t=>t.Price)>0
                     select new AvgPriceOfBrands()
                     {
                         Brand = x.Name,
-                        Price = Math.Round(x.Cars.Average(t=>t.Price),0)
+                        
+                        Price =  Math.Round(x.Cars.Average(t=>t.Price),0)
                     }).OrderBy(x => x.Price);
         }
         public BrandLogic(IRepository<Brand> repo)

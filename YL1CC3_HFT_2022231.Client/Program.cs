@@ -48,6 +48,19 @@ namespace YL1CC3_HFT_2022231.Client
                 input.CarId = int.Parse(Console.ReadLine());
                 rest.Post(input, "rent");
             }
+            else if (entity=="Car")
+            {
+                Car input = new Car();
+                Console.WriteLine("Enter car props: ");
+                Console.WriteLine("Model(e.g.: bmw 116d):");
+                input.Model = Console.ReadLine();
+                Console.WriteLine("Price:");
+                input.Price = int.Parse(Console.ReadLine());
+                List("Brand");
+                Console.WriteLine("Brand id:");
+                input.BrandId = int.Parse(Console.ReadLine());
+                rest.Post(input, "car");
+            }
         }
         static void List(string entity)
         {
@@ -59,7 +72,7 @@ namespace YL1CC3_HFT_2022231.Client
                     Console.WriteLine(item.Id + ": " + item.Name);
                 }
             }
-            else if (entity == "Rent")
+            if (entity == "Rent")
             {
                 List<Rent> rents = rest.Get<Rent>("rent");
                 foreach (var item in rents)
@@ -67,6 +80,15 @@ namespace YL1CC3_HFT_2022231.Client
                     Console.WriteLine(item.Id + ": " + item.Start+"--"+item.End+" Interval Days: "+item.Interval +" Model: "+item.Car.Model);
                 }
             }
+            if (entity=="Car")
+            {
+                List<Car> cars = rest.Get<Car>("car");
+                foreach (var item in cars)
+                {
+                    Console.WriteLine(item.Id + ": " + item.Model);
+                }
+            }
+            Console.WriteLine("Press enter to continue");
             Console.ReadLine();
         }
         static void Update(string entity)
@@ -74,6 +96,7 @@ namespace YL1CC3_HFT_2022231.Client
             if (entity == "Brand")
             {
                 Console.Write("Enter Brand's id to update: ");
+                List("Brand");
                 int id = int.Parse(Console.ReadLine());
                 Brand one = rest.Get<Brand>(id, "brand");
                 Console.Write($"New name [old: {one.Name}]: ");
@@ -81,12 +104,29 @@ namespace YL1CC3_HFT_2022231.Client
                 one.Name = name;
                 rest.Put(one, "brand");
             }
+            else if (entity=="Car")
+            {
+                Console.WriteLine("Enter Car's id to update: ");
+                List("Car");
+                int id = int.Parse(Console.ReadLine());
+                Car one = rest.Get<Car>(id, "car");
+                Console.WriteLine($"New model [old: {one.Model}] i.g.: bmw 116d:  ");
+                one.Model = Console.ReadLine();
+                List("Brand");
+                Console.WriteLine($"Brand id: ");
+                int iden = int.Parse(Console.ReadLine());
+                one.BrandId = iden;
+                one.Brand.Name = rest.Get<Brand>(one.BrandId, "brand").Name;
+                rest.Put(one, "car");
+
+            }
             else if (entity == "Rent")
             {
                 Console.Write("Enter Rent's id to update: ");
+                List("Rent");
                 int id = int.Parse(Console.ReadLine());
                 Rent one = rest.Get<Rent>(id, "rent");
-                Console.WriteLine($"New rent [old id: {one.Car.Id}]: ");
+                Console.WriteLine($"New rent [old car id: {one.Car.Id}]: ");
                 
                 Console.WriteLine("Enter Rent Start! ");
                 Console.Write("Year:");
@@ -106,6 +146,7 @@ namespace YL1CC3_HFT_2022231.Client
                 int daye = int.Parse(Console.ReadLine());
                 one.End = new DateTime(yeare, monthe, daye);
                 Console.WriteLine("Enter Carid");
+                List("Car");
                 one.CarId = int.Parse(Console.ReadLine());
                 rest.Put(one, "rent");
             }
