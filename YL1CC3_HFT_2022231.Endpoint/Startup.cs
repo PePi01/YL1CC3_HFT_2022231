@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YL1CC3_HFT_2022231.Models;
+using YL1CC3_HFT_2022231.Repository;
 
 namespace YL1CC3_HFT_2022231.Endpoint
 {
@@ -25,6 +29,10 @@ namespace YL1CC3_HFT_2022231.Endpoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<CarDbContext>();
+            services.AddTransient<IRepository<Car>, CarRepository>();
+            services.AddTransient<IRepository<Rent>, RentRepository>();
+            services.AddTransient<IRepository<Brand>, BrandRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -42,6 +50,15 @@ namespace YL1CC3_HFT_2022231.Endpoint
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "YL1CC3_HFT_2022231.Endpoint v1"));
             }
+
+            app.UseExceptionHandler(c => c.Run(async context =>
+            {
+                var exception = context.Features
+                    .Get<IExceptionHandlerPathFeature>()
+                    .Error;
+                var response = new { Msg = exception.Message };
+                await context.Response.WriteAsJsonAsync(response);
+            }));
 
             app.UseRouting();
 

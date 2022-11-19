@@ -13,13 +13,13 @@ namespace YL1CC3_HFT_2022231.Client
 
 
             CarDbContext db = new CarDbContext();
-            var cars = new CarRepository(db);
-            var rents = new RentRepository(db);
-            var brands = new BrandRepository(db);
+            //var cars = new CarRepository(db);
+            //var rents = new RentRepository(db);
+            //var brands = new BrandRepository(db);
 
-            var carLogic = new CarLogic(cars);
-            var rentLogic = new RentLogic(rents);
-            var brandLogic = new BrandLogic(brands);
+            var carLogic = new CarLogic(new CarRepository(db));
+            var rentLogic = new RentLogic(new RentRepository(db));
+            var brandLogic = new BrandLogic(new BrandRepository(db));
 
 
             var asd = from x in db.Rents.AsEnumerable()
@@ -64,13 +64,13 @@ namespace YL1CC3_HFT_2022231.Client
                             Brand = g.Key.Name,
                             Sum = g.Sum(t => t.Price)
                         };
-            var seg=from x in rents.ReadAll().AsEnumerable()
-            group x by x.CarId into g
-            select new 
-            {
-                Frequency = g.Count(),
-                Model = g.Select(t => t.Car.Model),
-            };
+            //var seg=from x in rents.ReadAll().AsEnumerable()
+            //group x by x.CarId into g
+            //select new 
+            //{
+            //    Frequency = g.Count(),
+            //    Model = g.Select(t => t.Car.Model),
+            //};
             // NON CRUDOK 
             var segg = carLogic.FreqOfCarsRented();
             var fos = brandLogic.SumPriceByBrand();

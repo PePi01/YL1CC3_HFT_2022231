@@ -60,10 +60,11 @@ namespace YL1CC3_HFT_2022231.Logic
             this.repo.Update(item);
         }
 
-        public class RentFrequency
-        {
-            public int Frequency { get; set; }
-            public string Model { get; set; }
-        }
+        
+    }
+    public class RentFrequency
+    {
+        public int Frequency { get; set; }
+        public string Model { get; set; }
     }
 }

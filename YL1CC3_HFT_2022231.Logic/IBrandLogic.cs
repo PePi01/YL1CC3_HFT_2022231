@@ -14,5 +14,8 @@ namespace YL1CC3_HFT_2022231.Logic
         Brand Read(int id);
         IQueryable<Brand> ReadAll();
         void Update(Brand item);
+        IEnumerable<PriceOfBrands> SumPriceByBrand();
+        IEnumerable<RentBrandFrequency> FreqOfBrandsRented();
+        IEnumerable<AvgPriceOfBrands> AvgPriceByBrand();
     }
 }
