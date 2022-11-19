@@ -16,7 +16,7 @@ namespace YL1CC3_HFT_2022231.Client
             {
                 if (entity == "Brand")
                 {
-                    Console.Write("Enter Actor Name: ");
+                    Console.Write("Enter Brand Name: ");
                     string name = Console.ReadLine();
                     rest.Post(new Brand() { Name = name }, "brand");
                 }
@@ -25,8 +25,8 @@ namespace YL1CC3_HFT_2022231.Client
             {
                 if (entity == "Brand")
                 {
-                    List<Brand> actors = rest.Get<Brand>("brand");
-                    foreach (var item in actors)
+                    List<Brand> brands = rest.Get<Brand>("brand");
+                    foreach (var item in brands)
                     {
                         Console.WriteLine(item.Id + ": " + item.Name);
                     }
@@ -35,36 +35,36 @@ namespace YL1CC3_HFT_2022231.Client
             }
             static void Update(string entity)
             {
-                if (entity == "Actor")
+                if (entity == "Brand")
                 {
-                    Console.Write("Enter Actor's id to update: ");
+                    Console.Write("Enter Brand's id to update: ");
                     int id = int.Parse(Console.ReadLine());
-                    Brand one = rest.Get<Brand>(id, "actor");
+                    Brand one = rest.Get<Brand>(id, "brand");
                     Console.Write($"New name [old: {one.Name}]: ");
                     string name = Console.ReadLine();
                     one.Name = name;
-                    rest.Put(one, "actor");
+                    rest.Put(one, "brand");
                 }
             }
             static void Delete(string entity)
             {
-                if (entity == "Actor")
+                if (entity == "Brand")
                 {
-                    Console.Write("Enter Actor's id to delete: ");
+                    Console.Write("Enter Brand's id to delete: ");
                     int id = int.Parse(Console.ReadLine());
-                    rest.Delete(id, "actor");
+                    rest.Delete(id, "brand");
                 }
             }
 
             static void Main(string[] args)
             {
-                rest = new RestService("http://localhost:53910/", "movie");
+                rest = new RestService("http://localhost:10237/");
 
-                var actorSubMenu = new ConsoleMenu(args, level: 1)
-                    .Add("List", () => List("Actor"))
-                    .Add("Create", () => Create("Actor"))
-                    .Add("Delete", () => Delete("Actor"))
-                    .Add("Update", () => Update("Actor"))
+                var brandSubMenu = new ConsoleMenu(args, level: 1)
+                    .Add("List", () => List("Brand"))
+                    .Add("Create", () => Create("Brand"))
+                    .Add("Delete", () => Delete("Brand"))
+                    .Add("Update", () => Update("Brand"))
                     .Add("Exit", ConsoleMenu.Close);
 
                 var roleSubMenu = new ConsoleMenu(args, level: 1)
@@ -91,7 +91,7 @@ namespace YL1CC3_HFT_2022231.Client
 
                 var menu = new ConsoleMenu(args, level: 0)
                     .Add("Movies", () => movieSubMenu.Show())
-                    .Add("Actors", () => actorSubMenu.Show())
+                    .Add("Brands", () => brandSubMenu.Show())
                     .Add("Roles", () => roleSubMenu.Show())
                     .Add("Directors", () => directorSubMenu.Show())
                     .Add("Exit", ConsoleMenu.Close);
