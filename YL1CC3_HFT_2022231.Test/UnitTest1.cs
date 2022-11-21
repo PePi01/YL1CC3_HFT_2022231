@@ -107,7 +107,7 @@ namespace YL1CC3_HFT_2022231.Test
         public void FreqOfBrandsRentedTest()
         {
             mockBrandRepo = new Mock<IRepository<Brand>>();
-            var repo=    new List<Brand>()
+            var repo = new List<Brand>()
                         {
                         new Brand() { Id = 1, Name = "BMW",Cars=new List<Car>(){ new Car() { Id = 1, BrandId = 1, Price = 30000, Model = "BMW 116d",Brand=new Brand() { Id = 1, Name = "BMW"  },Rents=new List<Rent>() { new Rent() { Id = 1, CarId = 1, Start = new DateTime(2020, 10, 15), End = new DateTime(2020, 10, 16) } } } } },
                         new Brand() { Id = 2, Name = "Citroen", Cars=new List<Car>(){ new Car() { Id = 2, BrandId = 2, Price = 20000, Model = "Citroen c3", Brand = new Brand() { Id = 2, Name = "Citroen" }, Rents=new List<Rent>() { new Rent() { Id = 2, CarId = 2, Start = new DateTime(2019, 10, 15), End = new DateTime(2020, 5, 16) } } },new Car() { Id = 3, BrandId = 2, Price = 25000, Model = "Citroen c4", Brand = new Brand() { Id = 2, Name = "Citroen" }, Rents=new List<Rent>() {  new Rent() { Id = 3, CarId = 3, Start = new DateTime(2021, 10, 5), End = new DateTime(2022, 10, 1) } } } } },
@@ -120,65 +120,76 @@ namespace YL1CC3_HFT_2022231.Test
             Assert.That(test1.ElementAt(1).Frequency == 2);
             Assert.That(test1.ElementAt(1).Brand == "Citroen");
         }
-
-        //[Test]
-        //public void YearStatisticsTest()
-        //{
-        //    var actual = logic.YearStatistics().ToList();
-        //    var expected = new List<YearInfo>()
-        //    {
-        //        new YearInfo()
-        //        {
-        //            Year = 2008,
-        //            AvgRating = 5,
-        //            MovieNumber = 1
-        //        },
-        //        new YearInfo()
-        //        {
-        //            Year = 2009,
-        //            AvgRating = 6.5,
-        //            MovieNumber = 2
-        //        },
-        //        new YearInfo()
-        //        {
-        //            Year = 2010,
-        //            AvgRating = 8,
-        //            MovieNumber = 1
-        //        }
-        //    };
-
-        //    Assert.AreEqual(expected, actual);
-        //}
-
-        //[Test]
-        //public void CreateMovieTestWithCorrectTitle()
-        //{
-        //    var movie = new Movie() { Title = "Vukk" };
-
-        //    //ACT
-        //    logic.Create(movie);
-
-        //    //ASSERT
-        //    mockMovieRepo.Verify(r => r.Create(movie), Times.Once);
-        //}
-
-        //[Test]
-        //public void CreateMovieTestWithInCorrectTitle()
-        //{
-        //    var movie = new Movie() { Title = "24" };
-        //    try
-        //    {
-        //        //ACT
-        //        logic.Create(movie);
-        //    }
-        //    catch
-        //    {
-
-        //    }
-
-        //    //ASSERT
-        //    mockMovieRepo.Verify(r => r.Create(movie), Times.Never);
-        //}
+        [Test]
+        public void AvgPriceByBrandTest()
+        {
+            mockBrandRepo = new Mock<IRepository<Brand>>();
+            var repo = new List<Brand>()
+                        {
+                        new Brand() { Id = 1, Name = "BMW",Cars=new List<Car>(){ new Car() { Id = 1, BrandId = 1, Price = 30000, Model = "BMW 116d",Brand=new Brand() { Id = 1, Name = "BMW"  },Rents=new List<Rent>() { new Rent() { Id = 1, CarId = 1, Start = new DateTime(2020, 10, 15), End = new DateTime(2020, 10, 16) } } } } },
+                        new Brand() { Id = 2, Name = "Citroen", Cars=new List<Car>(){ new Car() { Id = 2, BrandId = 2, Price = 20000, Model = "Citroen c3", Brand = new Brand() { Id = 2, Name = "Citroen" }, Rents=new List<Rent>() { new Rent() { Id = 2, CarId = 2, Start = new DateTime(2019, 10, 15), End = new DateTime(2020, 5, 16) } } },new Car() { Id = 3, BrandId = 2, Price = 25000, Model = "Citroen c4", Brand = new Brand() { Id = 2, Name = "Citroen" }, Rents=new List<Rent>() {  new Rent() { Id = 3, CarId = 3, Start = new DateTime(2021, 10, 5), End = new DateTime(2022, 10, 1) } } } } },
+                        }.AsQueryable();
+            logicBrand = new BrandLogic(mockBrandRepo.Object);
+            mockBrandRepo.Setup(t => t.ReadAll()).Returns(repo);
+            var test1 = logicBrand.AvgPriceByBrand();
+            Assert.That(test1.ElementAt(0).Price == 22500);
+            Assert.That(test1.ElementAt(0).Brand == "Citroen");
+            Assert.That(test1.ElementAt(1).Price == 30000);
+            Assert.That(test1.ElementAt(1).Brand == "BMW");
+        }
+        [Test]
+        public void RentTimesTest()
+        {
+            mockRentRepo = new Mock<IRepository<Rent>>();
+            var rent = new List<Rent>()
+                    {
+                        new() {Car=new Car(){ Model="bmw 116d"}, Id = 1, CarId = 1, Start = new DateTime(2020, 10, 15), End = new DateTime(2020, 10, 16) },
+                        new() { Car=new Car(){ Model="bmw e39"},Id = 2, CarId = 2, Start = new DateTime(2019, 8, 27), End = new DateTime(2020, 10, 1) },
+                    }.AsQueryable();
+            logicRent = new RentLogic(mockRentRepo.Object);
+            mockRentRepo.Setup(m => m.ReadAll()).Returns(rent);
+            var test = logicRent.RentTimes();
+            Assert.That(test.ElementAt(0).Days == 1);
+            Assert.That(test.ElementAt(0).Model == "bmw 116d");
+            Assert.That(test.ElementAt(1).Days == 401);
+            Assert.That(test.ElementAt(1).Model == "bmw e39");
+        }
+        [Test]
+        public void CarLogicCreateTest()
+        {
+            mockCarRepo = new Mock<IRepository<Car>>();
+            var asd = new List<Car>() { new Car() { Price = -500 } }.AsQueryable();
+            mockCarRepo.Setup(t => t.ReadAll()).Returns(asd);
+            logicCar = new CarLogic(mockCarRepo.Object);
+            Assert.That(() => logicCar.Create(asd.ElementAt(0)), Throws.Exception);
+        }
+        [Test]
+        public void BrandLogicCreateTest()
+        {
+            mockBrandRepo = new Mock<IRepository<Brand>>();
+            var asd=new List<Brand>() { new Brand() { Name="aaaaaaaaaaaaaaaa"} }.AsQueryable();
+            mockBrandRepo.Setup(t => t.ReadAll()).Returns(asd);
+            logicBrand = new BrandLogic(mockBrandRepo.Object);
+            Assert.That(() => logicBrand.Create(asd.ElementAt(0)), Throws.Exception);
+        }
+        [Test]
+        public void RentLogicReadTest()
+        {
+            mockRentRepo = new Mock<IRepository<Rent>>();
+            var asd=new List<Rent>() { new Rent() { Id=0} }.AsQueryable();
+            mockRentRepo.Setup(t => t.ReadAll()).Returns(asd);
+            logicRent = new RentLogic(mockRentRepo.Object);
+            Assert.That(() => logicRent.Read(0), Throws.Exception);
+        }
+        [Test]
+        public void RentLogicDeleteTest()
+        {
+            mockRentRepo = new Mock<IRepository<Rent>>();
+            var asd = new List<Rent>() { new Rent() { Id = 0 } }.AsQueryable();
+            mockRentRepo.Setup(t => t.ReadAll()).Returns(asd);
+            logicRent = new RentLogic(mockRentRepo.Object);
+            Assert.That(() => logicRent.Delete(1), Throws.Nothing);
+        }
     }
 
 }
