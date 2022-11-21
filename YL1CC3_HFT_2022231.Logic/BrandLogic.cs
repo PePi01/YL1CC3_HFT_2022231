@@ -49,17 +49,36 @@ namespace YL1CC3_HFT_2022231.Logic
 
         public void Create(Brand item)
         {
+            if (item.Name.Length>8)
+            {
+                throw new ArgumentException();
+            }
             this.repo.Create(item);
         }
 
         public void Delete(int id)
         {
-            this.repo.Delete(id);
+            if (id < 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                this.repo.Delete(id);
+            }
+            
         }
 
         public Brand Read(int id)
         {
-            return this.repo.Read(id);
+            if (id < 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                return this.repo.Read(id);
+            }
         }
 
         public IQueryable<Brand> ReadAll()
@@ -69,11 +88,11 @@ namespace YL1CC3_HFT_2022231.Logic
 
         public void Update(Brand item)
         {
+            if (item.Name.Length > 8)
+            {
+                throw new ArgumentException();
+            }
             this.repo.Update(item);
         }
     }
-
-    
-
-    
 }

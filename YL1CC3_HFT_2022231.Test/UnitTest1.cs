@@ -63,7 +63,7 @@ namespace YL1CC3_HFT_2022231.Test
         public void FreqOfCarsRentedTest()
         {
 
-                var malac=new List<Car>()
+            var malac = new List<Car>()
                 {
                     new Car() { Id = 1, BrandId = 1, Price = 20000, Model = "BMW 116d"
                     ,Rents=new List<Rent>(){ new Rent() { Id = 1, CarId = 1, Start = new DateTime(2020, 10, 15), End = new DateTime(2020, 10, 16) } } },
@@ -76,14 +76,37 @@ namespace YL1CC3_HFT_2022231.Test
             mockCarRepo.Setup(m => m.ReadAll()).Returns(malac);
             logicCar = new CarLogic(mockCarRepo.Object);
 
-            int[] freq = { 1, 2 };
-            string[] models = { "BMW 116d ", "Audi A3" };
-            ;
+
             var avg = logicCar.FreqOfCarsRented();
-            for (int i = 0; i < avg.Count(); i++)
-            {
-                Assert.That(avg.ElementAt(i).Frequency == freq[i] && avg.ElementAt(i).Model == models[i]);
-            }
+
+            Assert.That(avg.ElementAt(0).Frequency == 1);
+            Assert.That(avg.ElementAt(1).Frequency == 2);
+            Assert.That(avg.ElementAt(0).Model == "BMW 116d");
+            Assert.That(avg.ElementAt(1).Model == "Audi A3");
+        }
+
+        [Test]
+        public void SumPriceByBrandTest()
+        {
+            mockBrandRepo = new Mock<IRepository<Brand>>();
+            mockBrandRepo.Setup(t => t.ReadAll()).Returns(new List<Brand>()
+                        {
+                        new Brand() { Id = 1, Name = "BMW",Cars=new List<Car>(){ new Car() { Id = 1, BrandId = 1, Price = 30000, Model = "BMW 116d" } } },
+                        new Brand() { Id = 2, Name = "Citroen", Cars=new List<Car>(){ new Car() { Id = 2, BrandId = 2, Price = 20000, Model = "Citroen c3" },new Car() { Id = 3, BrandId = 2, Price = 25000, Model = "Citroen c4" } } },
+
+                        }.AsQueryable());
+            logicBrand = new BrandLogic(mockBrandRepo.Object);
+            var test = logicBrand.SumPriceByBrand();
+            Assert.That(test.ElementAt(0).Price == 30000);
+            Assert.That(test.ElementAt(1).Price == 45000);
+            Assert.That(test.ElementAt(0).Brand == "BMW");
+            Assert.That(test.ElementAt(1).Brand == "Citroen");
+        }
+
+        [Test]
+        public void FreqOfBrandsRentedTest()
+        {
+
         }
 
         //[Test]
