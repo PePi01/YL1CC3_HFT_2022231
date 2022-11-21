@@ -190,6 +190,15 @@ namespace YL1CC3_HFT_2022231.Test
             logicRent = new RentLogic(mockRentRepo.Object);
             Assert.That(() => logicRent.Delete(1), Throws.Nothing);
         }
+        [Test]
+        public void RentLogicUpdateTest()
+        {
+            mockRentRepo = new Mock<IRepository<Rent>>();
+            var asd = new Rent() { Start = new DateTime(2021, 8, 27), End = new DateTime(2020, 10, 1) } ;
+            mockRentRepo.Setup(t => t.Read(0)).Returns(asd);
+            logicRent = new RentLogic(mockRentRepo.Object);
+            Assert.That(() => logicRent.Update(asd), Throws.Exception);
+        }
     }
 
 }
