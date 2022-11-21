@@ -106,7 +106,19 @@ namespace YL1CC3_HFT_2022231.Test
         [Test]
         public void FreqOfBrandsRentedTest()
         {
-
+            mockBrandRepo = new Mock<IRepository<Brand>>();
+            var repo=    new List<Brand>()
+                        {
+                        new Brand() { Id = 1, Name = "BMW",Cars=new List<Car>(){ new Car() { Id = 1, BrandId = 1, Price = 30000, Model = "BMW 116d",Brand=new Brand() { Id = 1, Name = "BMW"  },Rents=new List<Rent>() { new Rent() { Id = 1, CarId = 1, Start = new DateTime(2020, 10, 15), End = new DateTime(2020, 10, 16) } } } } },
+                        new Brand() { Id = 2, Name = "Citroen", Cars=new List<Car>(){ new Car() { Id = 2, BrandId = 2, Price = 20000, Model = "Citroen c3", Brand = new Brand() { Id = 2, Name = "Citroen" }, Rents=new List<Rent>() { new Rent() { Id = 2, CarId = 2, Start = new DateTime(2019, 10, 15), End = new DateTime(2020, 5, 16) } } },new Car() { Id = 3, BrandId = 2, Price = 25000, Model = "Citroen c4", Brand = new Brand() { Id = 2, Name = "Citroen" }, Rents=new List<Rent>() {  new Rent() { Id = 3, CarId = 3, Start = new DateTime(2021, 10, 5), End = new DateTime(2022, 10, 1) } } } } },
+                        }.AsQueryable();
+            logicBrand = new BrandLogic(mockBrandRepo.Object);
+            mockBrandRepo.Setup(t => t.ReadAll()).Returns(repo);
+            var test1 = logicBrand.FreqOfBrandsRented();
+            Assert.That(test1.ElementAt(0).Frequency == 1);
+            Assert.That(test1.ElementAt(0).Brand == "BMW");
+            Assert.That(test1.ElementAt(1).Frequency == 2);
+            Assert.That(test1.ElementAt(1).Brand == "Citroen");
         }
 
         //[Test]

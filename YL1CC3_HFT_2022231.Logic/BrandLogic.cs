@@ -22,12 +22,12 @@ namespace YL1CC3_HFT_2022231.Logic
 
         public IEnumerable<RentBrandFrequency> FreqOfBrandsRented()
         {
-            return from x in repo.ReadAll()
+            return (from x in repo.ReadAll()
                    select new RentBrandFrequency
                    {
                        Brand = x.Name,
                        Frequency = x.Cars.Select(t=>t.Brand.Name).Count()
-                   };
+                   }).OrderBy(t=>t.Frequency);
         }
         // markak atlagosan mennyibe kerulnek
         public IEnumerable<AvgPriceOfBrands> AvgPriceByBrand()
