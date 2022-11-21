@@ -13,23 +13,16 @@ namespace YL1CC3_HFT_2022231.Logic
         IRepository<Car> repo;
         public IEnumerable<RentFrequency> FreqOfCarsRented()
         {
-            return from x in repo.ReadAll()
-                   select new RentFrequency
-                   {
-                       Model = x.Model,
-                       Frequency = x.Rents.Count()
-                   };
+            
+            return (from x in repo.ReadAll()
+                    select new RentFrequency
+                    {
+                        Model = x.Model,
+                        Frequency = x.Rents.Count()
+                    }).OrderBy(t => t.Frequency);
+            
         }
 
-        //public IEnumerable<> SumPriceByBrand()
-        //{
-        //    var price = from x in repo.ReadAll()//new CarRepository(db).ReadAll().AsEnumerable()
-        //                select new Price
-        //                {
-        //                    Brand = x.Brand,
-        //                    Sum = x.Model
-        //                };
-        //}
         public CarLogic(IRepository<Car> repo)
         {
             this.repo = repo;

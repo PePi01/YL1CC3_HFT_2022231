@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using YL1CC3_HFT_2022231.Models;
 using YL1CC3_HFT_2022231.Repository;
-using static YL1CC3_HFT_2022231.Models.Brand;
 
 namespace YL1CC3_HFT_2022231.Logic
 {
