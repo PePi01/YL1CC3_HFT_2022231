@@ -35,6 +35,10 @@ namespace YL1CC3_HFT_2022231.Repository
             .HasForeignKey(t=>t.CarId)
             .OnDelete(DeleteBehavior.Cascade)
             );
+            modelBuilder.Entity<Brand>(t => t
+            .HasMany(t => t.Cars)
+            .WithOne(t => t.Brand)
+            .OnDelete(DeleteBehavior.Cascade));
 
 
 

@@ -171,7 +171,7 @@ namespace YL1CC3_HFT_2022231.Client
                 List("Car");
                 Console.Write("Enter Car's id to delete: ");
                 int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "rent");
+                rest.Delete(id, "car");
             }
         }
         static void SPBB()

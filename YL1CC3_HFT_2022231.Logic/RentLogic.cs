@@ -20,7 +20,7 @@ namespace YL1CC3_HFT_2022231.Logic
                    {
                        Days = x.Interval,
                        Model=x.Car.Model,
-                   }).OrderBy(t=>t.Days);
+                   }).AsEnumerable().OrderBy(t=>t.Days);
             
         }
 
