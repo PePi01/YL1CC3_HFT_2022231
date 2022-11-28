@@ -25,5 +25,10 @@ namespace YL1CC3_HFT_2022231.Endpoint.Controllers
         {
             return this.logic.FreqOfCarsRented();
         }
+        [HttpGet]
+        public IEnumerable<ParametricBrand> ParametricBrands([FromQuery] int num)
+        {
+            return this.logic.ParametricBrand(num);
+        }
     }
 }

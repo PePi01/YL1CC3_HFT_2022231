@@ -223,6 +223,19 @@ namespace YL1CC3_HFT_2022231.Client
             }
             Console.ReadLine();
         }
+        static void PB()
+        {
+            int num;
+            List("Brand");
+            Console.WriteLine("Which Brand's cars to show?");
+            num = int.Parse(Console.ReadLine());
+            var hello = rest.Get<ParametricBrand>($"NCCar/ParametricBrands?num={num}");
+            foreach (var item in hello)
+            {
+                Console.WriteLine(item.Model);
+            }
+            Console.ReadLine();
+        }
 
 
         static void Main(string[] args)
@@ -256,6 +269,7 @@ namespace YL1CC3_HFT_2022231.Client
                 .Add("AvgPriceByBrand", () => APBB())
                 .Add("FreqOfCarsRented", () => FOCR())
                 .Add("RentDays", () => RT())
+                .Add("ParametricBrand", () => PB())
                 .Add("Exit", ConsoleMenu.Close);
 
 

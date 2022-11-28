@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace YL1CC3_HFT_2022231.Models
 {
+    public class ParametricBrand
+    {
+        public string Model { get; set; }
+    }
     public class PriceOfBrands
     {
         public string Brand { get; set; }

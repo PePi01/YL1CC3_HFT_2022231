@@ -22,6 +22,17 @@ namespace YL1CC3_HFT_2022231.Logic
                     }).OrderBy(t => t.Frequency);
             
         }
+        public IEnumerable<ParametricBrand> ParametricBrand(int num)
+        {
+
+            return from x in repo.ReadAll()
+                   where x.BrandId == num
+                   select new ParametricBrand
+                   {
+                       Model = x.Model,
+                   };
+
+        }
 
         public CarLogic(IRepository<Car> repo)
         {

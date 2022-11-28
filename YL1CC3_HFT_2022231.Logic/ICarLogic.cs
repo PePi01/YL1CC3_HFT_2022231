@@ -15,5 +15,6 @@ namespace YL1CC3_HFT_2022231.Logic
         IQueryable<Car> ReadAll();
         void Update(Car item);
         IEnumerable<RentFrequency> FreqOfCarsRented();
+        IEnumerable<ParametricBrand> ParametricBrand(int num);
     }
 }
